@@ -1,16 +1,16 @@
 # Implementation Spec Standard
 
-Use this standard to produce the final implementation handoff: a codebase-verified document that tells an implementation agent exactly what to change, what order to land it in, what relationships must be preserved, and what observable behavior proves completion. In conversation and in other documents, "spec" is always short for implementation spec.
+Use this standard to produce the final implementation handoff: a codebase-verified document that identifies the change surfaces, landing order, load-bearing relationships, and observable behavior that prove completion. In conversation and in other documents, "spec" is always short for implementation spec.
 
 An implementation spec is not a plan and not a sketch. A plan owns durable product/design intent, while a sketch records provisional implementation-facing context. The spec is codebase-verified and is the only document intended to be executed directly.
 
-Earlier artifacts may inform the spec, but they are not a substitute for spec-time verification. Before finalizing the implementation spec, the authoring agent re-reads the relevant live code and updates or replaces earlier assumptions as needed.
+Earlier artifacts may inform the spec, but they are not a substitute for spec-time verification. Before spec authoring begins, the user explicitly confirms the focused target and locked behavior from the `/implement` scratchboard. The authoring agent then verifies the current behavior owner, direct integration path, nearest relevant tests, and every load-bearing relationship, expanding farther only when direct evidence exposes a risk or contradiction.
 
 ## Roles and Quality Gate
 
-The spec is authored by a high-capability agent after independent codebase exploration. It is executed by an implementation agent that translates clear instructions into code but **cannot reliably infer cross-system relationships**. Every relationship the change depends on must be stated; an omitted relationship will be invented, and the executing agent will not notice it was wrong.
+The spec is authored after focused codebase exploration and may be executed by the same agent in one uninterrupted `/implement` flow or handed to another agent later. It must state every load-bearing relationship the change depends on so an executor does not invent ownership, call direction, cleanup, compatibility, sequencing, or verification behavior. It does not transcribe local code that an executor can safely read just in time.
 
-Before handoff, the human reviews the Goal and Summary. Those sections are the approval surface; everything below them is for execution. The canonical `/implement` preview may present a faithful rendering of Goal and Summary in the user's language while the durable spec remains entirely in English; explicit confirmation of that preview approves both the rendered behavior and the executor's concrete plan. The spec plus that review is the last quality gate before code is written.
+Before handoff, the human reviews the Goal and Summary. Those sections are the approval surface; everything below them is for execution. The canonical `/implement` preview may present a faithful rendering of Goal and Summary in the user's language while the durable spec remains entirely in English; explicit confirmation of that preview approves both the rendered behavior and the executor's concrete plan. This second confirmation is distinct from the pre-spec target confirmation and provides a safe model-handoff boundary before code is written.
 
 ## Output Structure
 
@@ -53,7 +53,7 @@ Write the constraints and decisions an implementation agent would get wrong with
 - **Changed integration contracts**: before -> after for any cross-system interface this change modifies.
 - **Wrong shapes to avoid**: describe the incorrect coupling pattern in terms of system responsibility, not function names.
 
-**Completeness rule, load-bearing:** Every system relationship that a Files-to-Change entry participates in must appear here, even one that would be "obvious" to a strong reader. The executing agent does not infer, so an unstated relationship is an unspecified one. The boundary that keeps this from becoming noise is **blast radius**, not obviousness: document every relationship the change touches; do not document relationships elsewhere in the codebase that the change does not interact with.
+**Completeness rule, load-bearing:** State every relationship whose wrong interpretation could change approved behavior, ownership or call direction, lifecycle cleanup, compatibility or migration, landing order, or verification validity. A Files-to-Change entry does not require an inventory of every relationship visible in that file. Local helper mechanics and direct structural details that cannot change the approved or load-bearing shape remain just-in-time implementation reading.
 
 ### 5. Scope
 
@@ -71,7 +71,7 @@ Short bullet list of what is intentionally out of scope. Keep it tight to preven
 | -------- | ---------------------- | ------------------------------------------------ |
 | `<file>` | Small / Medium / Large | What this file is responsible for in this change |
 
-Identifies ownership and change effort. Does not prescribe line-by-line edits.
+Identifies expected ownership surfaces and change effort. It is not an exhaustive list of incidental files discovered during local implementation, and it does not prescribe line-by-line edits.
 
 ### 7. Execution Outline
 
@@ -110,12 +110,12 @@ Do not include file paths or function names.
 1. Write entirely in English.
 2. No open questions; unresolved decisions are resolved in conversation before the spec is written.
 3. The first line under the title is `Parent Plan: ...`; use the parent plan filename for plan children and `Parent Plan: none (standalone spec)` for standalone specs.
-4. Requires codebase exploration before authoring. Never fill Relational Context or Files to Change from the plan or sketch alone.
-5. Apply the completeness rule: every cross-system relationship within the change's blast radius is stated, even the obvious ones; relationships outside the blast radius stay undocumented.
+4. Requires focused codebase exploration before authoring. Never fill Relational Context or Files to Change from the plan or sketch alone, but do not require open-ended repository exploration when the direct owner and integration path provide sufficient evidence.
+5. Apply the completeness rule: every load-bearing relationship is stated; locally discoverable relationships that cannot affect the approved or constrained shape stay out of the spec.
 6. Do not mix future scope into this document.
 7. Do not hard-wrap prose lines. Tables and code blocks are exempt.
 8. Execution Outline is expected for non-trivial specs. Omit it only when Files to Change plus Implementation Notes already make the edit sequence obvious.
-9. Execution Outline is a landing sequence, not a script. It should be specific enough for a lower-capability implementation agent to proceed without inventing order, but it must not become line-by-line code instructions.
+9. Execution Outline is a landing sequence, not a script. It should be specific enough for an implementation agent to proceed without inventing order, but it must not become line-by-line code instructions.
 10. Implementation Notes stay shorter than a full per-file plan. If you are writing step-by-step per-file instructions, move the order into Execution Outline and keep notes to hazards/constraints.
 11. Do not include implementation detail the executing agent can discover from the codebase, except where the completeness rule requires stating a relationship explicitly.
 12. Target under 800 words for Relational Context through Edge Cases; exceed only when relational complexity or execution ordering genuinely requires it. The Summary is exempt because completeness beats brevity there.
@@ -124,7 +124,7 @@ Do not include file paths or function names.
 
 - Standalone specs live at `dev/docs/plans/<scope>_<short_description>.implementation_spec.md` with the usual one-line pointer in `TODO.md`.
 - Plan-child specs live next to the parent plan as `dev/docs/plans/<parent_scope>_<NN>_<slug>.implementation_spec.md` and are pointed to only from the parent plan's child overview table; they get no separate `TODO.md` line.
-- When a child sketch exists, creating the spec is a rewrite-and-verify step, not a promotion-by-trust step: read the sketch as context, re-check the live codebase, keep what survives, and freely delete or replace what no longer fits.
+- When a child sketch exists, creating the spec is a rewrite-and-verify step, not a promotion-by-trust step: read the sketch as context, verify its load-bearing coordinates against the focused live-code path, keep what survives, and freely delete or replace what no longer fits.
 - Shipped work gets a `CHANGELOG.md` entry and archives the spec. A shipped child is also cut from the parent's child overview table; a shipped standalone deletes its `TODO.md` line.
 
 ## Template
