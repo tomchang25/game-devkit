@@ -30,11 +30,15 @@ Nothing currently in progress.
 
 Queued work with an agreed shape. Promote only the next eligible line to `## Active`.
 
+- [core_workflow] Add an `impl-preview` command to `core/workflows/commands/` — the executing agent's read-only pre-implementation gate that re-reads an approved spec (or spec-equivalent sketch) against live code and reports its concrete plan for user confirmation before coding — and wire it into the `work_lifecycle` Operational Commands table, README navigation, and `consumer_manifest.json`
+
 ---
 
 ## Chore
 
 One line, no rationale, no backing document.
+
+- [closeout_standard] On child and flow closeout, keep the shipped spec's row in the parent plan's child overview and only drop its ref link (never re-point it at the archived path), instead of removing the row, so the plan keeps the delivered-scope record without a link that breaks when the spec is archived or deleted
 
 ---
 
@@ -47,3 +51,11 @@ One line, no rationale, no backing document.
 ## Draft
 
 Ideas that need explanation before they can become a one-line item. Use one `###` heading per idea.
+
+### Converge Web Linting And Boundary Enforcement On ESLint (0.10)
+
+The two Web consumers currently disagree on lint tooling. One uses ESLint 9 with `no-restricted-imports` layer patterns, so its lint stage and its boundary stage are one command. The other uses oxlint for style plus dependency-cruiser for a separate boundary stage plus knip for unused-code reporting. The command surface standard names the `lint` and `check:boundaries` stages but leaves tool choice project-owned, so both are compliant today; the cost is that a boundary rule cannot be copied between projects and every reviewer must learn two setups.
+
+The direction is to standardize the Web platform on ESLint as the canonical linter and boundary enforcer, narrowing the command surface standard so lint tooling moves from project-owned to platform-specified.
+
+Promoting it requires deciding: whether boundary enforcement is expressed as ESLint `no-restricted-imports` layer patterns (folding `check:boundaries` back into the `lint` stage as the ESLint consumer already does) or kept as a separate stage on a shared config; whether a canonical ESLint flat-config baseline ships as a consumer template or stays project-authored against a shared rule list; what happens to the dependency-cruiser and knip capabilities the oxlint consumer relies on, including the deliberate unused-code report; and the migration path plus verifier changes for the oxlint consumer.
