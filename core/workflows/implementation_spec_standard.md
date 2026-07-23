@@ -10,7 +10,7 @@ Earlier artifacts may inform the spec, but they are not a substitute for spec-ti
 
 The spec is authored by a high-capability agent after independent codebase exploration. It is executed by an implementation agent that translates clear instructions into code but **cannot reliably infer cross-system relationships**. Every relationship the change depends on must be stated; an omitted relationship will be invented, and the executing agent will not notice it was wrong.
 
-Before handoff, the human reviews the Goal and Summary. Those sections are the approval surface; everything below them is for execution. The spec plus that review is the last quality gate before code is written.
+Before handoff, the human reviews the Goal and Summary. Those sections are the approval surface; everything below them is for execution. The canonical `/implement` preview may present a faithful rendering of Goal and Summary in the user's language while the durable spec remains entirely in English; explicit confirmation of that preview approves both the rendered behavior and the executor's concrete plan. The spec plus that review is the last quality gate before code is written.
 
 ## Output Structure
 

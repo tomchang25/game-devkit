@@ -80,6 +80,7 @@ Implementation begins only when all of the following are true:
 - Relational Context covers every relationship inside the Files to Change blast radius.
 - Scope, compatibility, migration, recovery behavior, meaningful edge cases, and verification have no unresolved decisions.
 - The parent plan or forward-work tracker points to exactly one executable handoff.
+- The user has explicitly confirmed the canonical `/implement` preview, including its faithful user-language rendering of the Goal and Summary and the executor's concrete landing plan.
 
 Implementation may adapt local technical details when the live code differs from the spec without changing approved behavior. A difference that changes requirements, scope, or compatibility returns to the decision gate.
 
@@ -123,12 +124,13 @@ Artifact standards define what a correct artifact looks like. Command contracts 
 | Operation | Core command contract | Mutation boundary |
 | --- | --- | --- |
 | Retrieve focused repository context | `commands/research-context.md` | Read-only |
-| Resolve user-authority decisions before a spec | `commands/spec-discuss.md` | Read-only |
-| Build a codebase-verified implementation spec | `commands/spec-build.md` | Documentation and tracking only |
+| Prepare, preview, implement, and verify focused work | `commands/implement.md` | Staged: read-only decisions, planning documentation, read-only preview, then confirmed implementation |
 | Review a staged snapshot | `commands/stage-review.md` | Read-only |
 | Close completed work | `commands/closeout.md` | Documentation and tracking only |
 | Suggest a staged commit message | `commands/commit-msg.md` | Read-only |
 | Review a branch and draft pull-request text | `commands/pr-review.md` | Read-only |
+
+`/implement` is one user-facing orchestration command, not a collapsed lifecycle stage. It preserves the Decision, Spec, Preview, Implementation, and Verification gates, resumes across conversation turns without another slash command, and does not permit implementation mutation before explicit preview confirmation.
 
 Platform-only commands, such as a dedicated engine test procedure, may live below `platforms/<platform>/workflows/commands/`. They extend the available operations but never fork this lifecycle or duplicate a core command.
 

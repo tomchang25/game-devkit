@@ -105,7 +105,7 @@ A consuming project reads shared rules directly from the canonical paths under i
 
 ## Work Lifecycle
 
-`core/workflows/work_lifecycle.md` is the single lifecycle owner for `Draft -> (Probe) -> (Main Plan) -> (Child Sketch) -> Implementation Spec -> Implementation -> Verify -> Closeout`. Parenthesized stages are optional; a standalone implementation spec remains required before implementation. Workflow artifacts define document quality, and command contracts define safe operations. Platforms may add dedicated commands, but they never fork the core lifecycle or duplicate shared workflows.
+`core/workflows/work_lifecycle.md` is the single lifecycle owner for `Draft -> (Probe) -> (Main Plan) -> (Child Sketch) -> Implementation Spec -> Implementation -> Verify -> Closeout`. Parenthesized stages are optional; a standalone implementation spec remains required before implementation. `/implement` is the single user-facing command from decision resolution through focused verification: conversation stays in the user's language, the durable spec stays in English, and source changes remain blocked until the user confirms the implementation preview. Workflow artifacts define document quality, and command contracts define safe operations. Platforms may add dedicated commands, but they never fork the core lifecycle or duplicate shared workflows.
 
 ## Versioning and Synchronization
 

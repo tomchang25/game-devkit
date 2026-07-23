@@ -123,9 +123,15 @@ REQUIRED: dict[str, tuple[str, ...]] = {
         "Spec-Time Decisions",
         "Do not produce a file-by-file inventory",
     ),
-    "core/workflows/commands/spec-build.md": (
+    "core/workflows/commands/implement.md": (
+        "## Language And Audience Lanes",
+        "## Mutation Boundaries",
+        "## Phase 1: Decision Gate",
+        "## Phase 2: Spec",
+        "## Phase 3: Preview",
+        "## Phase 4: Implementation And Verification",
         "consuming project's documentation verification contract",
-        "Do not run platform runtime checks",
+        "Do not change implementation files before explicit preview confirmation",
     ),
     "core/workflows/commands/stage-review.md": (
         "non-mutating staged-file checks",
@@ -264,6 +270,11 @@ FORBIDDEN: dict[str, tuple[str, ...]] = {
     ),
 }
 
+FORBIDDEN_PATHS = (
+    "core/workflows/commands/spec-build.md",
+    "core/workflows/commands/spec-discuss.md",
+)
+
 CORE_WORKFLOW_PLATFORM_TERMS = (
     "Godot",
     "GDScript",
@@ -335,6 +346,10 @@ def verify_required(errors: list[str]) -> None:
         for fragment in forbidden_fragments:
             if fragment in text:
                 errors.append(f"project-specific contract leaked into {relative}: {fragment!r}")
+
+    for relative in FORBIDDEN_PATHS:
+        if (ROOT / relative).exists():
+            errors.append(f"retired canonical command must be removed: {relative}")
 
 
 def verify_language(errors: list[str]) -> None:
