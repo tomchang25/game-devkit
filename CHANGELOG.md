@@ -5,6 +5,7 @@
 - Child closeout now keeps the shipped child's row in the parent overview and replaces only its Handoff link with plain text naming the spec, so the plan retains the delivered-scope record without a link that breaks when the spec is archived.
 - Add a draft status to the implementation spec standard: specs for later children of an ordered plan may be batch-prepared as decision-complete drafts that are never an executable handoff, and promotion revalidates every coordinate against the live codebase before the `/implement` confirmation stops.
 - Promote consumer-proven test economy into the Web testing standard: verification scoped to change risk, cheapest-observing-layer selection, browser tests reserved for browser-only subjects under a recurring cost budget, one extreme scenario per capability, fixture or interface setup instead of in-test simulation, and presentation-selection assertions owned by the unit layer.
+- State the browser suite cadence in the Web testing standard: the full acceptance suite is a CI and closeout gate, per-commit verification uses a targeted selection, and a consumer may enforce the cadence mechanically.
 
 ## 0.9.3
 

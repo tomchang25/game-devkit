@@ -30,6 +30,12 @@ Scope verification to the risk of the change: a content entry reusing a proven c
 - **Setup through interfaces, not simulation.** Reach the target state through an authored interface: a fixture that starts on the brink of the state under test, a debug hook, or recorded input. Never embed product logic in the test to play the system until the state emerges. If no interface reaches the state, author the missing fixture first; that investment is reusable and the in-test loop is not.
 - **Selection is not a picture.** A browser assertion that the runtime selected a presentation — which asset, variant, pose, or animation — verifies a pure mapping the unit layer already owns, while proving nothing about how it renders. Visual correctness comes only from a screenshot or visual-regression tool or human review, never from an attribute string.
 
+## Browser Suite Cadence
+
+The full browser acceptance suite is a CI gate on every push and at most a once-per-scope closeout gate locally; it is never a per-commit or per-step local gate. Per-commit browser verification uses a targeted selection covering the changed behavior, kept to a handful of tests, and lets CI cover the full suite after push. When a plan or spec asks for the browser suite to stay green during implementation, satisfy it with the targeted selection.
+
+A consumer may enforce this cadence mechanically — for example, a hook that rejects unfiltered full-suite invocations — and its test operations contract names the concrete commands, selection syntax, and any enforcement in place.
+
 ## Golden Fixtures
 
 - A normal test run only asserts against committed golden fixtures and never rewrites them; a divergence stays failing until a human resolves it.

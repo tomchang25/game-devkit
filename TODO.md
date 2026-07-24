@@ -30,7 +30,6 @@ Nothing currently in progress.
 
 Queued work with an agreed shape. Promote only the next eligible line to `## Active`.
 
-- [web_testing] State the browser acceptance run cadence in the Web testing standard: the full suite is a CI and closeout gate, per-commit verification uses a targeted test selection, and a consumer may enforce the cadence mechanically (0.10)
 
 ---
 
