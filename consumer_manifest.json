@@ -42,10 +42,8 @@
         "required_fragments": ["foundation_startup.md", "dev/agent_rules/agent_startup.md"]
       },
       "governance_checker": {
-        "path": "dev/tools/check-governance.mjs",
-        "platform_templates": {
-          "web-react": "tools/consumer_templates/platforms/web-react/check-governance.mjs"
-        },
+        "path": "dev/tools/check_governance.py",
+        "template": "tools/consumer_templates/common/check_governance.py",
         "required_fragments": ["governance: OK", "CONTRACTS"]
       }
     }

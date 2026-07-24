@@ -181,7 +181,7 @@ def main() -> int:
                 root / "dev" / "README.md",
                 root / "AGENTS.md",
                 root / "CLAUDE.md",
-                root / "dev" / "tools" / "check-governance.mjs",
+                root / "dev" / "tools" / "check_governance.py",
             )
             if not all(path.is_file() for path in recommended_web):
                 failures.append("web scaffold did not create all recommended governance files")
@@ -210,9 +210,13 @@ def main() -> int:
         root = Path(directory)
         build_consumer(root, {"schema_version": 2, "platform": "godot", "profiles": []})
         if require_scaffold(root, failures, "Recommended godot fixture"):
-            if (root / "dev" / "tools" / "check-governance.mjs").exists():
-                failures.append("godot scaffold created the web-only governance checker")
-            common_recommended = (root / "dev" / "README.md", root / "AGENTS.md", root / "CLAUDE.md")
+            # The Python checker is platform-neutral, so every consumer receives it.
+            common_recommended = (
+                root / "dev" / "README.md",
+                root / "AGENTS.md",
+                root / "CLAUDE.md",
+                root / "dev" / "tools" / "check_governance.py",
+            )
             if not all(path.is_file() for path in common_recommended):
                 failures.append("godot scaffold did not create the common recommended files")
             passed = run_verifier(root)

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.2
+
+- Convert the recommended governance checker from a Web-only `check-governance.mjs` to a platform-neutral `check_governance.py` under the common templates, so every consumer — not only Web ones — can scaffold it and it folds into the foundation's existing Python tooling.
+
 ## 0.10.1
 
 - Ship consumer governance scaffolding as consumer-owned templates: a trigger-map `dev/README.md`, paired `AGENTS.md`/`CLAUDE.md` entry points naming one startup chain, and a generic `check-governance.mjs` on Web platforms. `consumer_manifest.json` gains a `recommended_rules` section that `scaffold_consumer.py` creates on request and `verify_consumer.py` soft-checks — absent is fine, but a present file must keep its declared pointers.
