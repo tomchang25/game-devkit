@@ -30,7 +30,7 @@ Nothing currently in progress.
 
 Queued work with an agreed shape. Promote only the next eligible line to `## Active`.
 
-
+- [consumer_governance] Promote consumer governance scaffolding into shared templates delivered as consumer-owned copies under `tools/consumer_templates/`: a trigger-map README template, a governance checker template asserting required files and their canonical-owner pointers, entry-point templates keeping agent entry files in step, and the machine-checkable-rule policy folded into `core/standards/governance_structure_standard.md`
 ---
 
 ## Chore
@@ -49,15 +49,7 @@ One line, no rationale, no backing document.
 
 Ideas that need explanation before they can become a one-line item. Use one `###` heading per idea.
 
-### Consumer Governance Scaffolding (0.10)
-
-The two Web consumers diverge on governance enforcement. One ships a local governance checker (a required-file list where each file must exist and contain declared pointer strings back to its canonical owner), a trigger-map README (a two-column table routing each kind of work to its required reading), and a local enforcement standard defining what is machine-checked versus prose-reviewed plus the procedure for adding a machine-checkable rule. The other consumer has none of these, so its discovery rules live only in startup prose and nothing detects a broken pointer after a rename.
-
-The direction is to promote the proven pieces into shared scaffolding: a trigger-map README template and a generic governance checker template under `tools/consumer_templates/`, entry-point templates keeping the agent entry files in step across agent tools, and the machine-checkable-rule policy folded into `core/standards/governance_structure_standard.md`.
-
-Promoting it requires deciding: whether the checker ships as a copied template each consumer owns or as a shared tool driven by a consumer-owned manifest; how much of the pointer list `verify_consumer.py` should absorb instead; whether the trigger-map README becomes a required consumer contract or stays recommended; and what the entry-point template names as the single startup chain so multiple agent entry files cannot drift apart.
-
-### Converge Web Linting And Boundary Enforcement On ESLint (0.10)
+### Converge Web Linting And Boundary Enforcement On ESLint
 
 The two Web consumers currently disagree on lint tooling. One uses ESLint 9 with `no-restricted-imports` layer patterns, so its lint stage and its boundary stage are one command. The other uses oxlint for style plus dependency-cruiser for a separate boundary stage plus knip for unused-code reporting. The command surface standard names the `lint` and `check:boundaries` stages but leaves tool choice project-owned, so both are compliant today; the cost is that a boundary rule cannot be copied between projects and every reviewer must learn two setups.
 
