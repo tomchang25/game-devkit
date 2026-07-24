@@ -12,7 +12,7 @@ The user may provide a plan child, sketch, actionable probe, existing implementa
 /implement <target or free-form brief>
 ```
 
-Decisions explicitly confirmed earlier in the current conversation are part of the input. An existing implementation spec may skip document creation when it remains decision-complete and consistent with the live codebase, but it does not skip the Phase 1 scratchboard and target-confirmation stop.
+Decisions explicitly confirmed earlier in the current conversation are part of the input. An existing implementation spec may skip document creation when it remains decision-complete and consistent with the live codebase, but it does not skip the Phase 1 scratchboard and target-confirmation stop. A spec carrying the draft status marker of `implementation_spec_standard.md` is planning input, never an executable handoff: Phase 2 promotes it by revalidating every coordinate against the live codebase before the implementation-confirmation stop.
 
 ## Required Reading
 

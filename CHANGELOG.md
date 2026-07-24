@@ -3,6 +3,7 @@
 ## 0.10.0
 
 - Child closeout now keeps the shipped child's row in the parent overview and replaces only its Handoff link with plain text naming the spec, so the plan retains the delivered-scope record without a link that breaks when the spec is archived.
+- Add a draft status to the implementation spec standard: specs for later children of an ordered plan may be batch-prepared as decision-complete drafts that are never an executable handoff, and promotion revalidates every coordinate against the live codebase before the `/implement` confirmation stops.
 
 ## 0.9.3
 

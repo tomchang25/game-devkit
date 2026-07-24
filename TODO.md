@@ -32,7 +32,6 @@ Queued work with an agreed shape. Promote only the next eligible line to `## Act
 
 - [web_testing] Promote consumer-proven test-economy rules into the Web testing standard: verification scoped to the risk of the change, unit-first layer selection (a browser test that only drives public APIs and asserts semantic state belongs in the unit layer), per-suite cost budgets, one extreme scenario per capability instead of assertion stuffing, and fixture or interface setup instead of driving the product loop to reach the target state (0.10)
 - [web_testing] State the browser acceptance run cadence in the Web testing standard: the full suite is a CI and closeout gate, per-commit verification uses a targeted test selection, and a consumer may enforce the cadence mechanically (0.10)
-- [spec_standard] Add a draft status to the implementation spec standard for batch-prepared specs of ordered plan children: a declared draft marker, no unresolved decisions allowed, never an implementation authorization, and a promotion pass that revalidates every coordinate against the live codebase before the `/implement` confirmation stops (0.10)
 
 ---
 

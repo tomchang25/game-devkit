@@ -120,12 +120,25 @@ Do not include file paths or function names.
 11. Do not include implementation detail the executing agent can discover from the codebase, except where the completeness rule requires stating a relationship explicitly.
 12. Target under 800 words for Relational Context through Edge Cases; exceed only when relational complexity or execution ordering genuinely requires it. The Summary is exempt because completeness beats brevity there.
 
+## Draft Status
+
+For a parent plan with several ordered children, specs for later children may be prepared before the earlier children land. Such a batch-prepared spec is a planning artifact, not an executable handoff, and declares that explicitly:
+
+- Put `Status: Draft implementation spec` immediately after the parent marker line.
+- Keep the full section structure of this standard, authored from current codebase evidence rather than coordinates copied from a sketch.
+- State the expected dependency on earlier children in Relational Context and Execution Outline.
+- A draft carries no unresolved product, compatibility, scope, or numerical decisions — the no-open-questions rule applies unchanged. Draft status records only that earlier children will change the codebase, so coordinate revalidation and remapping remain pending.
+- The parent overview links to it labeled as a draft. A draft receives no `TODO.md` entry and does not make later children actionable before their landing order.
+- A draft may be revised in place as earlier children land.
+
+Promotion happens before implementation: re-read the draft against the live codebase, verify or update every file, symbol, relationship, and sequencing claim, remove the status line, and relabel the parent link as the sole executable handoff. Promotion does not bypass the `/implement` confirmation stops; the promoted spec still passes the target-confirmation and implementation-confirmation gates before code is written.
+
 ## Lifecycle
 
 - Standalone specs live at `dev/docs/plans/<scope>_<short_description>.implementation_spec.md` with the usual one-line pointer in `TODO.md`.
 - Plan-child specs live next to the parent plan as `dev/docs/plans/<parent_scope>_<NN>_<slug>.implementation_spec.md` and are pointed to only from the parent plan's child overview table; they get no separate `TODO.md` line.
 - When a child sketch exists, creating the spec is a rewrite-and-verify step, not a promotion-by-trust step: read the sketch as context, verify its load-bearing coordinates against the focused live-code path, keep what survives, and freely delete or replace what no longer fits.
-- Shipped work gets a `CHANGELOG.md` entry and archives the spec. A shipped child is also cut from the parent's child overview table; a shipped standalone deletes its `TODO.md` line.
+- Shipped work gets a `CHANGELOG.md` entry and archives the spec. A shipped child's overview row stays in the parent plan with its Handoff link replaced by plain text naming the spec, per the closeout standard; a shipped standalone deletes its `TODO.md` line.
 
 ## Template
 

@@ -72,6 +72,8 @@ Convert the next actionable child into an implementation spec only after product
 
 An implementation spec never carries unresolved questions. If the live codebase exposes a conflict that would change approved behavior, stop and return to the decision gate instead of silently rewriting the plan.
 
+For a parent plan with several ordered children, specs for later children may be batch-prepared ahead of their landing order under the implementation spec standard's draft status: decision-complete but marked pending revalidation, linked from the overview as drafts, and never the executable handoff until promoted against the live codebase.
+
 ### Implementation Spec to Implementation
 
 Implementation begins only when all of the following are true:
