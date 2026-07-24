@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.2
+
+- Make `/implement` use a focused scratchboard discussion, mandatory pre-spec and pre-code model-handoff stops, one shared spec-and-preview modeling pass, and just-in-time implementation reads instead of silently spanning every phase with one model.
+
+## 0.9.1
+
+- Replace the separate spec discussion, spec build, and implementation preview commands with one `/implement` orchestration command that preserves distinct decision, English-spec, user-language preview, implementation, and verification gates.
+
 ## 0.9.0
 
 - Forbid durable documents from referencing archived artifacts: closeout now finds a closing artifact's inbound references and lifts still-needed content into the referencing documents instead of leaving or repointing archive links.

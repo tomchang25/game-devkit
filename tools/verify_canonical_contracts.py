@@ -107,6 +107,9 @@ REQUIRED: dict[str, tuple[str, ...]] = {
         "### 2. Summary",
         "### 3. Requirements (standalone only)",
         "### 7. Execution Outline",
+        "explicitly confirms the focused target",
+        "every load-bearing relationship",
+        "just-in-time implementation reading",
         "Target under 800 words",
     ),
     "core/workflows/review_standard.md": (
@@ -123,9 +126,20 @@ REQUIRED: dict[str, tuple[str, ...]] = {
         "Spec-Time Decisions",
         "Do not produce a file-by-file inventory",
     ),
-    "core/workflows/commands/spec-build.md": (
+    "core/workflows/commands/implement.md": (
+        "## Language And Audience Lanes",
+        "## Model Handoffs",
+        "## Mutation Boundaries",
+        "## Phase 1: Focused Decision Scan",
+        "## Phase 2: Preview Modeling And Spec Build",
+        "## Phase 3: Confirmation",
+        "## Phase 4: Implementation And Verification",
+        "minimum sufficient codebase evidence",
+        "Always stop and ask the user to confirm or adjust the target",
+        "Do not continue to Phase 2 in the same assistant turn",
+        "Do not repeat an exploration pass",
         "consuming project's documentation verification contract",
-        "Do not run platform runtime checks",
+        "Do not change implementation files before explicit preview confirmation",
     ),
     "core/workflows/commands/stage-review.md": (
         "non-mutating staged-file checks",
@@ -264,6 +278,11 @@ FORBIDDEN: dict[str, tuple[str, ...]] = {
     ),
 }
 
+FORBIDDEN_PATHS = (
+    "core/workflows/commands/spec-build.md",
+    "core/workflows/commands/spec-discuss.md",
+)
+
 CORE_WORKFLOW_PLATFORM_TERMS = (
     "Godot",
     "GDScript",
@@ -335,6 +354,10 @@ def verify_required(errors: list[str]) -> None:
         for fragment in forbidden_fragments:
             if fragment in text:
                 errors.append(f"project-specific contract leaked into {relative}: {fragment!r}")
+
+    for relative in FORBIDDEN_PATHS:
+        if (ROOT / relative).exists():
+            errors.append(f"retired canonical command must be removed: {relative}")
 
 
 def verify_language(errors: list[str]) -> None:
