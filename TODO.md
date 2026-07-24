@@ -30,7 +30,6 @@ Nothing currently in progress.
 
 Queued work with an agreed shape. Promote only the next eligible line to `## Active`.
 
-- [web_testing] Promote consumer-proven test-economy rules into the Web testing standard: verification scoped to the risk of the change, unit-first layer selection (a browser test that only drives public APIs and asserts semantic state belongs in the unit layer), per-suite cost budgets, one extreme scenario per capability instead of assertion stuffing, and fixture or interface setup instead of driving the product loop to reach the target state (0.10)
 - [web_testing] State the browser acceptance run cadence in the Web testing standard: the full suite is a CI and closeout gate, per-commit verification uses a targeted test selection, and a consumer may enforce the cadence mechanically (0.10)
 
 ---

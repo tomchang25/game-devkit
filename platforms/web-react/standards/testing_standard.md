@@ -19,6 +19,17 @@ Platform: Web React.
 - A production build does not replace focused component, application, or domain regression coverage.
 - Browser acceptance suites verify system capabilities, not per-content variants; a new content entry that reuses a proven capability does not add a browser test.
 
+## Test Economy
+
+Scope verification to the risk of the change: a content entry reusing a proven capability needs a content or schema check, a new behavior needs a focused test plus one deterministic scenario, and only a new system-wide capability justifies a full vertical slice.
+
+- **Cheapest observing layer first.** If an assertion reads semantic state — domain results, emitted events, snapshots, catalog content, replay equality — it belongs in the fastest layer that can observe it. A browser test that drives the product only through public interfaces and asserts only semantic state is a unit test wearing a browser costume; move it.
+- **Browser only when the browser is the subject.** Reserve browser suites for behavior a headless layer cannot observe: real pointer, keyboard, or gesture input; storage and lifecycle across reload; animation and presentation timing; rendering geometry; boot, reset, and teardown behavior.
+- **Cost budget.** Every browser test pays its full boot cost on every future CI run. Adding one is a recurring budget decision, not a default; a test that needs long simulated interaction to reach its target state is set up wrong.
+- **One extreme scenario per capability.** A browser test verifies one capability at its most demanding representative case, which subsumes the easy cases. It does not restate mappings, catalog values, or schema facts that a cheaper layer already owns, and per-content variants never multiply browser tests.
+- **Setup through interfaces, not simulation.** Reach the target state through an authored interface: a fixture that starts on the brink of the state under test, a debug hook, or recorded input. Never embed product logic in the test to play the system until the state emerges. If no interface reaches the state, author the missing fixture first; that investment is reusable and the in-test loop is not.
+- **Selection is not a picture.** A browser assertion that the runtime selected a presentation — which asset, variant, pose, or animation — verifies a pure mapping the unit layer already owns, while proving nothing about how it renders. Visual correctness comes only from a screenshot or visual-regression tool or human review, never from an attribute string.
+
 ## Golden Fixtures
 
 - A normal test run only asserts against committed golden fixtures and never rewrites them; a divergence stays failing until a human resolves it.
