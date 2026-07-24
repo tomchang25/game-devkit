@@ -30,7 +30,9 @@ Nothing currently in progress.
 
 Queued work with an agreed shape. Promote only the next eligible line to `## Active`.
 
-- [core_workflow] Add an `impl-preview` command to `core/workflows/commands/` — the executing agent's read-only pre-implementation gate that re-reads an approved spec (or spec-equivalent sketch) against live code and reports its concrete plan for user confirmation before coding — and wire it into the `work_lifecycle` Operational Commands table, README navigation, and `consumer_manifest.json`
+- [web_testing] Promote consumer-proven test-economy rules into the Web testing standard: verification scoped to the risk of the change, unit-first layer selection (a browser test that only drives public APIs and asserts semantic state belongs in the unit layer), per-suite cost budgets, one extreme scenario per capability instead of assertion stuffing, and fixture or interface setup instead of driving the product loop to reach the target state (0.10)
+- [web_testing] State the browser acceptance run cadence in the Web testing standard: the full suite is a CI and closeout gate, per-commit verification uses a targeted test selection, and a consumer may enforce the cadence mechanically (0.10)
+- [spec_standard] Add a draft status to the implementation spec standard for batch-prepared specs of ordered plan children: a declared draft marker, no unresolved decisions allowed, never an implementation authorization, and a promotion pass that revalidates every coordinate against the live codebase before the `/implement` confirmation stops (0.10)
 
 ---
 
@@ -51,6 +53,14 @@ One line, no rationale, no backing document.
 ## Draft
 
 Ideas that need explanation before they can become a one-line item. Use one `###` heading per idea.
+
+### Consumer Governance Scaffolding (0.10)
+
+The two Web consumers diverge on governance enforcement. One ships a local governance checker (a required-file list where each file must exist and contain declared pointer strings back to its canonical owner), a trigger-map README (a two-column table routing each kind of work to its required reading), and a local enforcement standard defining what is machine-checked versus prose-reviewed plus the procedure for adding a machine-checkable rule. The other consumer has none of these, so its discovery rules live only in startup prose and nothing detects a broken pointer after a rename.
+
+The direction is to promote the proven pieces into shared scaffolding: a trigger-map README template and a generic governance checker template under `tools/consumer_templates/`, entry-point templates keeping the agent entry files in step across agent tools, and the machine-checkable-rule policy folded into `core/standards/governance_structure_standard.md`.
+
+Promoting it requires deciding: whether the checker ships as a copied template each consumer owns or as a shared tool driven by a consumer-owned manifest; how much of the pointer list `verify_consumer.py` should absorb instead; whether the trigger-map README becomes a required consumer contract or stays recommended; and what the entry-point template names as the single startup chain so multiple agent entry files cannot drift apart.
 
 ### Converge Web Linting And Boundary Enforcement On ESLint (0.10)
 

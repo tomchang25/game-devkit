@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.3
+
+- Drop the shipped `impl-preview` line from the forward queue; its scope landed inside the consolidated `/implement` command's mandatory confirmation stops.
+- Queue the 0.10 convergence batch: test-economy and browser-cadence promotion into the Web testing standard, an implementation-spec draft status for batch-prepared plan children, and consumer governance scaffolding (trigger-map README, governance checker, and entry-point templates).
+
 ## 0.9.2
 
 - Make `/implement` use a focused scratchboard discussion, mandatory pre-spec and pre-code model-handoff stops, one shared spec-and-preview modeling pass, and just-in-time implementation reads instead of silently spanning every phase with one model.
