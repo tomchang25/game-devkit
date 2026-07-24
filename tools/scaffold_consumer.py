@@ -36,7 +36,7 @@ def read_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def resolve_template(rule: dict[str, Any], platform: str) -> Path:
+def resolve_template(rule: dict[str, Any], platform: str, *, optional: bool = False) -> Path | None:
     template = rule.get("template")
     if template is None:
         platform_templates = rule.get("platform_templates", {})
@@ -44,6 +44,8 @@ def resolve_template(rule: dict[str, Any], platform: str) -> Path:
             raise RuntimeError("rule platform_templates must be an object")
         template = platform_templates.get(platform)
     if not isinstance(template, str):
+        if optional:
+            return None
         raise RuntimeError(f"no consumer template for platform {platform!r}")
     path = FOUNDATION / template
     if not path.is_file():
@@ -126,6 +128,20 @@ def main() -> int:
             if not isinstance(relative, str):
                 raise RuntimeError(f"consumer rule path is missing: {name!r}")
             template = resolve_template(rule, platform)
+            jobs.append((root / relative, render_template(template, values)))
+
+        recommended = contract.get("recommended_rules", {}) if isinstance(contract, dict) else {}
+        if not isinstance(recommended, dict):
+            raise RuntimeError("consumer manifest recommended_rules must be an object")
+        for name, rule in recommended.items():
+            if not isinstance(rule, dict):
+                raise RuntimeError(f"recommended rule entry must be an object: {name!r}")
+            relative = rule.get("path")
+            if not isinstance(relative, str):
+                raise RuntimeError(f"recommended rule path is missing: {name!r}")
+            template = resolve_template(rule, platform, optional=True)
+            if template is None:
+                continue
             jobs.append((root / relative, render_template(template, values)))
     except RuntimeError as error:
         print(f"consumer-scaffold: ERROR: {error}")

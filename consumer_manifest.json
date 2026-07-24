@@ -24,6 +24,30 @@
         },
         "required_fragments": ["# Test Operations"]
       }
+    },
+    "recommended_rules": {
+      "dev_readme": {
+        "path": "dev/README.md",
+        "template": "tools/consumer_templates/common/dev_readme.md",
+        "required_fragments": ["foundation_startup.md", "work_lifecycle.md"]
+      },
+      "agents_entry": {
+        "path": "AGENTS.md",
+        "template": "tools/consumer_templates/common/AGENTS.md",
+        "required_fragments": ["foundation_startup.md", "dev/agent_rules/agent_startup.md"]
+      },
+      "claude_entry": {
+        "path": "CLAUDE.md",
+        "template": "tools/consumer_templates/common/CLAUDE.md",
+        "required_fragments": ["foundation_startup.md", "dev/agent_rules/agent_startup.md"]
+      },
+      "governance_checker": {
+        "path": "dev/tools/check-governance.mjs",
+        "platform_templates": {
+          "web-react": "tools/consumer_templates/platforms/web-react/check-governance.mjs"
+        },
+        "required_fragments": ["governance: OK", "CONTRACTS"]
+      }
     }
   },
   "platforms": {

@@ -173,6 +173,52 @@ def main() -> int:
         if missing_config.returncode == 0 or "missing required dev/foundation.config.json" not in missing_config.stdout:
             failures.append("consumer without schema-2 configuration was not rejected")
 
+    with tempfile.TemporaryDirectory(prefix="game-devkit-recommended-web-") as directory:
+        root = Path(directory)
+        build_consumer(root, {"schema_version": 2, "platform": "web-react", "profiles": []})
+        if require_scaffold(root, failures, "Recommended web fixture"):
+            recommended_web = (
+                root / "dev" / "README.md",
+                root / "AGENTS.md",
+                root / "CLAUDE.md",
+                root / "dev" / "tools" / "check-governance.mjs",
+            )
+            if not all(path.is_file() for path in recommended_web):
+                failures.append("web scaffold did not create all recommended governance files")
+            passed = run_verifier(root)
+            if passed.returncode != 0 or "foundation: OK (web-react; no profiles" not in passed.stdout:
+                failures.append(f"scaffolded recommended files failed verification:\n{passed.stdout}{passed.stderr}")
+
+            # A present recommended file with broken wiring must fail the soft check.
+            readme = root / "dev" / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8").replace("work_lifecycle.md", "life_cycle.md"),
+                encoding="utf-8",
+            )
+            broken = run_verifier(root)
+            if broken.returncode == 0 or "recommended rule dev/README.md must reference 'work_lifecycle.md'" not in broken.stdout:
+                failures.append("recommended file with broken wiring was not rejected")
+
+            # An absent recommended file is opt-in and must not fail verification.
+            for path in recommended_web:
+                path.unlink()
+            absent = run_verifier(root)
+            if absent.returncode != 0 or "foundation: OK (web-react; no profiles" not in absent.stdout:
+                failures.append(f"absent recommended files were treated as an error:\n{absent.stdout}{absent.stderr}")
+
+    with tempfile.TemporaryDirectory(prefix="game-devkit-recommended-godot-") as directory:
+        root = Path(directory)
+        build_consumer(root, {"schema_version": 2, "platform": "godot", "profiles": []})
+        if require_scaffold(root, failures, "Recommended godot fixture"):
+            if (root / "dev" / "tools" / "check-governance.mjs").exists():
+                failures.append("godot scaffold created the web-only governance checker")
+            common_recommended = (root / "dev" / "README.md", root / "AGENTS.md", root / "CLAUDE.md")
+            if not all(path.is_file() for path in common_recommended):
+                failures.append("godot scaffold did not create the common recommended files")
+            passed = run_verifier(root)
+            if passed.returncode != 0 or "foundation: OK (godot; no profiles" not in passed.stdout:
+                failures.append(f"godot recommended scaffold failed verification:\n{passed.stdout}{passed.stderr}")
+
     if failures:
         for failure in failures:
             print(f"consumer-test: ERROR: {failure}")
@@ -180,7 +226,7 @@ def main() -> int:
 
     print(
         "consumer-test: OK (scaffolded Godot/Web consumers, required operation rules, "
-        "legacy-owner rejection, and invalid configuration)"
+        "recommended governance scaffolding with soft-check, legacy-owner rejection, and invalid configuration)"
     )
     return 0
 

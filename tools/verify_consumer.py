@@ -125,6 +125,36 @@ def verify_consumer_contract(
             if fragment not in text:
                 errors.append(f"consumer rule {relative} must reference {fragment!r}")
 
+    recommended = contract.get("recommended_rules", {}) if isinstance(contract, dict) else {}
+    if not isinstance(recommended, dict):
+        errors.append("consumer manifest recommended_rules must be an object")
+        recommended = {}
+    for name, rule in recommended.items():
+        if not isinstance(rule, dict):
+            errors.append(f"invalid recommended rule entry: {name!r}")
+            continue
+        relative = rule.get("path")
+        if not isinstance(relative, str):
+            errors.append(f"recommended rule path is missing: {name!r}")
+            continue
+        path = root / relative
+        if not path.is_file():
+            # Recommended rules are opt-in: an absent file is not an error. A present file
+            # with broken wiring is exactly the silent loss this soft check exists to catch.
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError as error:
+            errors.append(f"cannot read recommended consumer rule {relative}: {error}")
+            continue
+        fragments = rule.get("required_fragments", [])
+        if not isinstance(fragments, list) or not all(isinstance(item, str) for item in fragments):
+            errors.append(f"invalid required fragments for recommended rule: {name!r}")
+            continue
+        for fragment in fragments:
+            if fragment not in text:
+                errors.append(f"recommended rule {relative} must reference {fragment!r}")
+
     platforms = manifest.get("platforms", {})
     platform_entry = platforms.get(platform, {}) if isinstance(platforms, dict) else {}
     forbidden = platform_entry.get("forbidden_consumer_files", []) if isinstance(platform_entry, dict) else []

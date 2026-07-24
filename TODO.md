@@ -30,7 +30,6 @@ Nothing currently in progress.
 
 Queued work with an agreed shape. Promote only the next eligible line to `## Active`.
 
-- [consumer_governance] Promote consumer governance scaffolding into shared templates delivered as consumer-owned copies under `tools/consumer_templates/`: a trigger-map README template, a governance checker template asserting required files and their canonical-owner pointers, entry-point templates keeping agent entry files in step, and the machine-checkable-rule policy folded into `core/standards/governance_structure_standard.md`
 ---
 
 ## Chore

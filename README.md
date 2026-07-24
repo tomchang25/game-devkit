@@ -19,7 +19,7 @@ profiles/
   action-rpg/                 Action-entity architecture; currently constrained to Godot
   sim-management/             Store/System management architecture; currently constrained to Godot
 tools/
-  consumer_templates/         Tool-owned starters for required project-local operation contracts
+  consumer_templates/         Tool-owned starters for required operation contracts and recommended governance scaffolding
 ```
 
 `core/standards/governance_structure_standard.md` is the canonical owner for placement, language, extension, README, ownership, and addendum rules. This README is a navigation and installation surface only.
@@ -87,6 +87,8 @@ python dev/foundation/tools/scaffold_consumer.py --root . --project-name "My Gam
 ```
 
 The scaffold creates only missing files and never overwrites an existing project-owned rule. Common templates provide the startup and Git shapes; the selected platform provides the test-operations shape. Scaffolded test defaults declare automation unavailable until the consumer records its real commands, environment, pass criteria, and reporting boundary.
+
+The same scaffold also offers recommended governance scaffolding — a trigger-map `dev/README.md`, paired `AGENTS.md` and `CLAUDE.md` entry points naming one startup chain, and a local `dev/tools/check-governance.mjs` on Web platforms. These are optional and consumer-owned: the verifier soft-checks them (an absent file is fine, a present file must keep its declared pointers), and a consumer extends its own checker copy with project-specific assertions.
 
 Run the consumer verifier after customizing the generated contracts:
 

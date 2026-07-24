@@ -104,6 +104,17 @@ Before adding or moving a governance document, answer in order:
 
 When classification remains ambiguous, prefer the narrowest existing canonical owner that avoids duplication. Do not create a new layer or parallel standard for a hypothetical future consumer.
 
+## Machine-Checkable Rules
+
+A verifier protects a governance rule from silent decay; it never replaces the human-readable rule or its canonical owner. Before adding a machine-checkable assertion:
+
+1. Assign the rule to its canonical owner by the placement tests above. A checker enforces an existing owned contract; it does not become the contract.
+2. Add an assertion only when the rule is owned at the layer running the checker, has a real silent-loss risk (a rename, move, or deletion that breaks discovery without any other failure), and can be judged accurately with low false positives.
+3. Keep the canonical rule in its owning document. The checker is protection, not the source of truth; a rule that lives only in a checker has no owner.
+4. Prefer asserting a load-bearing pointer — a required file exists and contains the string that routes a reader to its owner — over reproducing the rule's logic. Pointer checks catch the common decay (a broken reference after a rename) without duplicating judgment the prose owns.
+
+Foundation ships this enforcement as consumer-owned scaffolding: `consumer_manifest.json` distinguishes required project-local contracts, which every consumer must provide, from recommended governance scaffolding — a trigger-map README, paired agent entry points, and a local governance checker — which `scaffold_consumer.py` creates on request and `verify_consumer.py` soft-checks. A recommended file is optional, but once present its declared pointers are verified, so an adopted piece cannot rot unnoticed. A consumer extends its own checker copy with project-specific assertions under the same rules.
+
 ## Change Requirements
 
 Changes to governance structure must update every affected discovery and verification surface in the same change:

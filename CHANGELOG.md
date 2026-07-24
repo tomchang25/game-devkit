@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.1
+
+- Ship consumer governance scaffolding as consumer-owned templates: a trigger-map `dev/README.md`, paired `AGENTS.md`/`CLAUDE.md` entry points naming one startup chain, and a generic `check-governance.mjs` on Web platforms. `consumer_manifest.json` gains a `recommended_rules` section that `scaffold_consumer.py` creates on request and `verify_consumer.py` soft-checks — absent is fine, but a present file must keep its declared pointers.
+- Add a Machine-Checkable Rules section to the governance structure standard: assign a rule to its canonical owner first, machine-check only owned contracts with real silent-loss risk and low false positives, and keep the prose as the source of truth.
+
 ## 0.10.0
 
 - Child closeout now keeps the shipped child's row in the parent overview and replaces only its Handoff link with plain text naming the spec, so the plan retains the delivered-scope record without a link that breaks when the spec is archived.
