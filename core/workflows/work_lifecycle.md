@@ -100,7 +100,7 @@ Core workflows define the obligation to verify. Platforms and consuming projects
 Use the closeout standard and command contract to:
 
 - Record the durable shipped outcome in the consumer's history owner when the change warrants one.
-- Remove the shipped child from the parent overview.
+- Mark the shipped child's overview row as shipped: keep the row, and replace its Handoff link with plain text naming the spec per the closeout standard.
 - Archive the implementation spec and archive or remove any superseded sketch.
 - Return to the next child while the main plan still has unshipped scope.
 

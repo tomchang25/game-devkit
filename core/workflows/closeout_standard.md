@@ -16,7 +16,7 @@ When a plan child is complete:
 
 1. Confirm that its acceptance criteria are satisfied and required checks have run or have an explicitly accepted gap.
 2. Record one outcome-focused history entry when the change warrants durable shipped history. Pure governance or tracking maintenance may omit a product changelog entry.
-3. Remove the child from the parent overview instead of retaining a checked row.
+3. Keep the shipped child's row in the parent overview with its Child and Scope columns verbatim, so the plan retains the durable record of what was delivered and against which spec. Replace the Handoff cell's link with plain text that names the spec and marks it shipped (for example `Shipped — <spec filename>`). Never re-point the Handoff link at the archived path: archives may be pruned at any time, so a link into them is a dead reference waiting to happen.
 4. Archive the implementation spec. Archive a superseded sketch only when its historical reasoning remains useful; otherwise remove it.
 5. Keep the main plan's forward-work pointer until the whole flow is complete.
 

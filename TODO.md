@@ -40,8 +40,6 @@ Queued work with an agreed shape. Promote only the next eligible line to `## Act
 
 One line, no rationale, no backing document.
 
-- [closeout_standard] On child and flow closeout, keep the shipped spec's row in the parent plan's child overview and only drop its ref link (never re-point it at the archived path), instead of removing the row, so the plan keeps the delivered-scope record without a link that breaks when the spec is archived or deleted
-
 ---
 
 ## Bug

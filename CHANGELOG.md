@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0
+
+- Child closeout now keeps the shipped child's row in the parent overview and replaces only its Handoff link with plain text naming the spec, so the plan retains the delivered-scope record without a link that breaks when the spec is archived.
+
 ## 0.9.3
 
 - Drop the shipped `impl-preview` line from the forward queue; its scope landed inside the consolidated `/implement` command's mandatory confirmation stops.
