@@ -30,6 +30,8 @@ Nothing currently in progress.
 
 Queued work with an agreed shape. Promote only the next eligible line to `## Active`.
 
+[debug_tooling] Define shared debug-tooling ownership, release-safety, catalog, scenario, viewer, and canonical-command contracts from two proven Web consumers.
+
 ---
 
 ## Chore
