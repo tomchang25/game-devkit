@@ -2,7 +2,7 @@
 
 Platform: Web React.
 
-This standard is the canonical owner of repository layout, root directory vocabulary, source layer vocabulary, and import boundary rules for Web game consumers. A consuming project keeps a project-local structure addendum only for trees this standard does not name (deployment shells, server concerns) and for feature-level placement detail. TypeScript and directory naming spelling remains owned by `naming_conventions.md`.
+This standard is the canonical owner of repository layout, root directory vocabulary, source layer vocabulary, application routing boundaries, and import boundary rules for Web game consumers. A consuming project keeps a project-local structure addendum only for trees this standard does not name (deployment shells, server concerns), feature-level placement detail, and explicit routing deviations. TypeScript and directory naming spelling remains owned by `naming_conventions.md`.
 
 ## Repository Root
 
@@ -46,6 +46,41 @@ src/
 - `app/` owns application assembly: routing, document metadata, global styles, and the bootstrap entry. The bootstrap entry stays minimal and accumulates no gameplay or presentation logic.
 - `harness/` owns deterministic scenario definitions, scenario discovery, debug APIs, and semantic mirrors used by tests and manual inspection.
 - `presentation/` and `shared/` are earned layers: create them when the owning work actually exists, never in advance. `presentation/` maps core snapshots and semantic events to renderer objects and animation timelines; animation lifetime never controls whether an entity remains logically active. `shared/` holds source (and `shared/assets/`) with demonstrated cross-feature ownership and no more precise owner; it is not a default or miscellaneous location.
+
+## Development Tool Route Surface
+
+`src/app/debug/` is the development-only application-composition subtree for tool discovery, route dispatch, scenario testbeds, inspectors, authoring Labs, and browser-harness entry pages. Tool-internal rules, authored content, runtime orchestration, and renderer implementations remain with their normal owners; the debug subtree wires those owners together and does not become a second application architecture.
+
+### Route Boundary
+
+- The application route shell is the only boundary between ordinary application routing and development tooling. It recognizes the exact `/debug` namespace segment: `/debug` and `/debug/...` enter the development surface, while a prefix such as `/debugger` remains an ordinary route.
+- Route selection uses the pathname. Query parameters and fragments belong to the selected tool and must not activate a harness or debug interface from an ordinary route.
+- In a development build, bare `/debug` renders the tool hub. Registered tools match exact pathnames below `/debug/`; an unknown path inside the namespace falls back to the hub rather than the ordinary application or a blank surface.
+- Outside the development namespace, the route shell preserves the consumer's ordinary route policy. This standard does not require `/` to be the only product route or replace a consumer's not-found behavior.
+- A full-document native anchor is sufficient for tool navigation. A consumer may use its existing client router, but a debug hub does not justify adding a routing dependency. If navigation is handled without a document load, the route owner must observe the same history and location lifecycle as the ordinary router.
+
+### Production Exclusion
+
+- Production routing does not expose the development namespace. A production request whose pathname starts with the exact `/debug` segment follows the consumer's ordinary production route policy without loading a hub, catalog, scenario, viewer, Lab, or debug interface.
+- The entire debug composition subtree stays outside the production-reachable module graph. Place a compile-time development guard at the ordinary/debug boundary and cross that boundary through a deferred import. A static import from a production-reachable module into `src/app/debug/` violates this contract even when rendering is later hidden by a runtime condition.
+- Guard the subtree once at its route boundary rather than duplicating top-level per-tool route conditionals. Tool modules remain deferred below that boundary so opening the hub does not eagerly initialize every tool.
+- Development server writer endpoints or middleware are independent of page routes. When a consumer provides them, they must be enabled only by the development server and must not become packaged production endpoints.
+
+### Catalog and Hub
+
+- One read-only catalog is the source for both hub listing and exact tool dispatch. Each entry carries a stable identifier, exact `/debug/<tool>` pathname, display title, concise description, and deferred component or renderer loader.
+- Adding a tool requires one catalog registration, not a new branch in the ordinary route shell or a separately maintained navigation list. Tool-specific props, query defaults, state, validation, endpoint access, and cleanup do not belong in the catalog.
+- The hub uses semantic navigation and represents an empty catalog explicitly. A shared visual shell or back-navigation header may be added when the consumer's tools benefit from one, but presentation chrome is not part of the routing contract.
+
+### Scenario and Viewer Integrity
+
+- Runtime-selectable scenarios and debug APIs remain in `src/harness/`; only `src/app`, normally through `src/app/debug/`, wires them into the application. Ordinary product routes neither interpret debug-only scenario parameters nor publish the harness interface.
+- A scenario testbed owns its query parsing, missing or invalid scenario fallback, isolated lifetime, and cleanup. Moving a testbed between debug paths must preserve those tool-owned semantics and update every browser-test entry URL in the same change.
+- Inspectors and viewers read canonical content, snapshots, projections, and validation results from their real owners. Interactive debug tools issue canonical commands through the normal runtime gateway; they do not duplicate formulas, directly mutate canonical state, or add debug shortcuts to ordinary product code.
+
+### Verification
+
+Use the consumer's `dev/agent_rules/test_operations.md` to prove the route surface at the cheapest capable layer. Cover the development hub, one registered exact path when tools exist, unknown-debug fallback, ordinary-route isolation from debug query parameters, and the production route policy. Production verification must also prove that debug-only modules and identifying content are absent from the built module graph; source inspection of a guard alone is insufficient.
 
 ## Import Boundaries
 

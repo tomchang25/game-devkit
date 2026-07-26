@@ -5,6 +5,7 @@ Load this file after `core/agent_rules/foundation_startup.md` when the consuming
 ## Platform Triggers
 
 - Before adding, moving, or reorganizing repository directories, source layers, tests, assets, or generated output, read `dev/foundation/platforms/web-react/standards/project_structure_standard.md` and the consumer's project-structure addendum.
+- Before adding or changing a development-only route, debug hub, tool catalog, scenario testbed, inspector, authoring Lab, browser-harness entry page, or production-exclusion boundary, read `dev/foundation/platforms/web-react/standards/project_structure_standard.md` and the consumer's project-structure addendum.
 - Before adding or renaming npm scripts, changing verification stages, or changing formatter configuration, read `dev/foundation/platforms/web-react/standards/command_surface_standard.md`.
 - Before adding or reorganizing TypeScript, TSX, hooks, or CSS Modules, read `dev/foundation/platforms/web-react/standards/naming_conventions.md`.
 - Before changing TypeScript control flow, function layout, or code spacing conventions, read `dev/foundation/platforms/web-react/standards/code_style_standard.md`.

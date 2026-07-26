@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.0
+
+- Define one canonical Web development-tool route surface in the project structure standard: the exact `/debug` namespace, hub and read-only catalog dispatch, unknown-path fallback, ordinary-route isolation, and compile-time guarded production exclusion.
+- Keep scenario query behavior and tool lifecycles with each debug tool while requiring viewers to consume canonical content and state projections and to mutate only through normal runtime commands; add the platform discovery trigger and verifier baseline for the contract.
+
 ## 0.10.2
 
 - Convert the recommended governance checker from a Web-only `check-governance.mjs` to a platform-neutral `check_governance.py` under the common templates, so every consumer — not only Web ones — can scaffold it and it folds into the foundation's existing Python tooling.
