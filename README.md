@@ -108,7 +108,7 @@ A consuming project reads shared rules directly from the canonical paths under i
 
 ## Work Lifecycle
 
-`core/workflows/work_lifecycle.md` is the single lifecycle owner for `Draft -> (Probe) -> (Main Plan) -> (Child Sketch) -> Implementation Spec -> Implementation -> Verify -> Closeout`. Parenthesized stages are optional; a standalone implementation spec remains required before implementation. `/implement` is the single user-facing command from decision resolution through focused verification: conversation stays in the user's language, the durable spec stays in English, and source changes remain blocked until the user confirms the implementation preview. Workflow artifacts define document quality, and command contracts define safe operations. Platforms may add dedicated commands, but they never fork the core lifecycle or duplicate shared workflows.
+`core/workflows/work_lifecycle.md` is the single lifecycle owner for `Draft -> (Probe) -> (Main Plan) -> (Child Sketch) -> Implementation Spec -> Implementation -> Verify -> Closeout`. Parenthesized stages are optional; a standalone implementation spec remains required before implementation. `/implement` is the single user-facing command from decision resolution through focused verification: invoking it authorizes non-destructive repository changes inside the named target, the durable spec stays in English, and the command stops only when a user-authority, scope, external-action, destructive-action, or verification boundary requires input. Workflow artifacts define document quality, and command contracts define safe operations. Platforms may add dedicated commands, but they never fork the core lifecycle or duplicate shared workflows.
 
 ## Versioning and Synchronization
 
@@ -167,6 +167,8 @@ When upgrading from a pre-schema-2 consumer, create `dev/foundation.config.json`
 When upgrading from v0.4.x to v0.5.0, remove consumer files whose only purpose is to provide a `# Shared Foundation Pointer` compatibility path. Keep project-owned rules and addenda, which may link directly to their canonical owners under `dev/foundation`. No compatibility files need to be recreated. Review, commit, and push the submodule pin and consumer migration from the consuming project.
 
 When upgrading from v0.5.0 to v0.6.0, scaffold or create the required `agent_startup.md`, `git_operations.md`, and `test_operations.md` project-local contracts. Godot consumers must consolidate `godot_test_check.md` and `godot_tests.md` into `test_operations.md`, update callers, and remove both legacy files before verification.
+
+When upgrading from v0.12.x to v0.13.0, remove consumer-local rules whose only purpose is to bypass the former mandatory `/implement` confirmation stops. Keep project-specific handoff shapes, stop conditions, and operation contracts as explicit deltas against the conditional-stop command.
 
 ## Verification
 

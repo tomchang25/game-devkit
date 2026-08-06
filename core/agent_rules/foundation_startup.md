@@ -36,6 +36,7 @@ Do not copy a shared rule into a consuming project. Read it directly from the pi
 - Before running any test, build, import, screenshot, smoke, or other platform validation operation, read the consuming project's `dev/agent_rules/test_operations.md`.
 - Before introducing a Controller, System, Store, Service, manager, save provider, or another runtime state owner, read `core/standards/runtime_ownership.md` plus the selected profiles and relevant project-local standards.
 - Before changing canonical, transient, presentation, or derived state ownership, read `core/standards/runtime_ownership.md` plus the selected profile.
+- Before designing or implementing a source change, adding an abstraction or dependency, or introducing a compatibility path, read `core/agent_rules/change_design.md`.
 - Before changing persistence, hydration, save scheduling, a persisted schema, or a compatibility promise, read `core/standards/persistence_standard.md`, `core/agent_rules/save_migrations.md`, and the platform and project-local persistence contracts.
 - Before creating or updating probes, plans, sketches, implementation specs, reviews, closeouts, PR text, or change summaries, read `core/workflows/work_lifecycle.md`, the matching workflow, and `core/standards/change_summary_standard.md` where a delivered outcome is being summarized.
 - Before finishing any change, read `core/agent_rules/lint_before_finish.md` and run the consuming project's non-mutating verification scoped to the touched files.

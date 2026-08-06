@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.13.0
+
+- Make `/implement` authorize non-destructive work inside its named target and continue from decision resolution through specification, implementation, and focused verification without scheduled confirmation stops.
+- Separate lifecycle readiness, implementation-spec quality, and command execution into their canonical owners; previews and model handoffs are optional progress boundaries, while unresolved user decisions, scope changes, external authority, destructive actions, and verification gaps remain conditional stops.
+- Add the direct-change rule for updating current owners and consumers together, removing obsolete paths, earning module and dependency boundaries, and rejecting speculative compatibility or extension surfaces.
+- Create save migrations only for shipped or explicitly supported persisted data covered by an active compatibility contract, while retaining the sign-off requirement for removing historical migration paths.
+
 ## 0.12.0
 
 - Add the opt-in `deterministic-rules` profile for resolver/effect decision slices, single-writer mutation owners, acyclic owner direction, mechanical snapshot assembly, and access gates that exist before the first profiled module.

@@ -4,13 +4,13 @@ Use this standard to produce the final implementation handoff: a codebase-verifi
 
 An implementation spec is not a plan and not a sketch. A plan owns durable product/design intent, while a sketch records provisional implementation-facing context. The spec is codebase-verified and is the only document intended to be executed directly.
 
-Earlier artifacts may inform the spec, but they are not a substitute for spec-time verification. Before spec authoring begins, the user explicitly confirms the focused target and locked behavior from the `/implement` scratchboard. The authoring agent then verifies the current behavior owner, direct integration path, nearest relevant tests, and every load-bearing relationship, expanding farther only when direct evidence exposes a risk or contradiction.
+Earlier artifacts may inform the spec, but they are not a substitute for spec-time verification. The authoring agent verifies the current behavior owner, direct integration path, nearest relevant tests, and every load-bearing relationship, expanding farther only when direct evidence exposes a risk or contradiction.
 
 ## Roles and Quality Gate
 
 The spec is authored after focused codebase exploration and may be executed by the same agent in one uninterrupted `/implement` flow or handed to another agent later. It must state every load-bearing relationship the change depends on so an executor does not invent ownership, call direction, cleanup, compatibility, sequencing, or verification behavior. It does not transcribe local code that an executor can safely read just in time.
 
-Before handoff, the human reviews the Goal and Summary. Those sections are the approval surface; everything below them is for execution. The canonical `/implement` preview may present a faithful rendering of Goal and Summary in the user's language while the durable spec remains entirely in English; explicit confirmation of that preview approves both the rendered behavior and the executor's concrete plan. This second confirmation is distinct from the pre-spec target confirmation and provides a safe model-handoff boundary before code is written.
+The Goal and Summary are the human review surface; everything below them is the execution contract. A reviewer can judge the intended behavior and result from those sections without reading the full implementation inventory. `/implement` may render them in the user's language as a progress preview while the durable spec remains entirely in English.
 
 ## Output Structure
 
@@ -32,7 +32,7 @@ One to three sentences: what capability is being added or changed, and why. Cond
 
 ### 2. Summary
 
-The human approval surface. It should be easy to scan, approve, or reject without reading the execution-only sections first.
+The human review surface. It should be easy to scan, challenge, or accept without reading the execution-only sections first.
 
 Use the shape that fits the work: a few short paragraphs, a bullet list with context-specific labels, or a compact table when comparison matters. Do not force every Summary into the same four headings. The reviewer should still be able to answer these questions from it: why the change is worth doing, what changes, roughly how the change will be made, and what the result will look like once it lands.
 
@@ -131,7 +131,7 @@ For a parent plan with several ordered children, specs for later children may be
 - The parent overview links to it labeled as a draft. A draft receives no `TODO.md` entry and does not make later children actionable before their landing order.
 - A draft may be revised in place as earlier children land.
 
-Promotion happens before implementation: re-read the draft against the live codebase, verify or update every file, symbol, relationship, and sequencing claim, remove the status line, and relabel the parent link as the sole executable handoff. Promotion does not bypass the `/implement` confirmation stops; the promoted spec still passes the target-confirmation and implementation-confirmation gates before code is written.
+Promotion happens before implementation: re-read the draft against the live codebase, verify or update every file, symbol, relationship, and sequencing claim, remove the status line, and relabel the parent link as the sole executable handoff.
 
 ## Lifecycle
 
@@ -162,7 +162,7 @@ Parent Plan: `<plan_filename.md>` <!-- or: Parent Plan: none (standalone spec) -
 ## Relational Context
 
 - <Call direction, ownership rule, changed contract, or wrong shape to avoid.>
-- <Every relationship within the change's blast radius, including the obvious ones.>
+- <Every load-bearing relationship whose wrong interpretation could change the required result or execution contract.>
 
 ## Scope
 

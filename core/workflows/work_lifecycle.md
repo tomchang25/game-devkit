@@ -50,7 +50,7 @@ Before the plan becomes queued or active, its Goal, Requirements, Non-Goals, Acc
 
 ### Draft or Probe to Standalone Implementation Spec
 
-Skip the main plan only when the work is a chore, narrow refactor, one-feature fix, or another tightly bounded change whose behavior, scope, ownership seam, and compatibility consequences are already clear. `/implement` still presents its focused scratchboard and stops for explicit target confirmation before creating the standalone implementation spec using `implementation_spec_standard.md`; that spec remains the required executable handoff before implementation.
+Skip the main plan only when the work is a chore, narrow refactor, one-feature fix, or another tightly bounded change whose behavior, scope, ownership seam, and compatibility consequences are already clear. Create the standalone implementation spec using `implementation_spec_standard.md`; that spec remains the required executable handoff before implementation.
 
 ### Main Plan to Child Sketch
 
@@ -64,7 +64,7 @@ Skip this transition when the child boundary is already narrow and clear enough 
 
 ### Main Plan or Sketch to Implementation Spec
 
-Convert the next actionable child into an implementation spec only after product behavior, compatibility promises, scope, and numerical meaning are locked and the user has explicitly confirmed the focused scratchboard target. A plan child may skip the sketch when its boundary is already clear. Even when no open decision remains, `/implement` stops for this confirmation before spec mutation:
+Convert the next actionable child into an implementation spec only after product behavior, compatibility promises, scope, and numerical meaning are locked. A plan child may skip the sketch when its boundary is already clear:
 
 1. Inspect the current behavior owner, direct integration path, nearest relevant tests, and evidence-triggered load-bearing relationships to create the implementation model using `implementation_spec_standard.md`.
 2. Use the sketch as context only. Verify or replace every file, symbol, relationship, and sequencing claim.
@@ -78,11 +78,11 @@ For a parent plan with several ordered children, specs for later children may be
 
 Implementation begins only when all of the following are true:
 
-- The Goal and Summary provide a reviewable approval surface.
+- The Goal and Summary provide a reviewable intent surface.
 - Relational Context covers every load-bearing relationship that constrains the expected change surfaces.
 - Scope, compatibility, migration, recovery behavior, meaningful edge cases, and verification have no unresolved decisions.
 - The parent plan or forward-work tracker points to exactly one executable handoff.
-- The user has explicitly confirmed the canonical `/implement` preview, including its faithful user-language rendering of the Goal and Summary and the executor's concrete landing plan.
+- The handoff has been revalidated against the current worktree.
 
 Implementation may adapt local technical details when the live code differs from the spec without changing approved behavior. A difference that changes requirements, scope, or compatibility returns to the decision gate.
 
@@ -126,13 +126,13 @@ Artifact standards define what a correct artifact looks like. Command contracts 
 | Operation | Core command contract | Mutation boundary |
 | --- | --- | --- |
 | Retrieve focused repository context | `commands/research-context.md` | Read-only |
-| Prepare, preview, implement, and verify focused work | `commands/implement.md` | Staged: read-only decisions, planning documentation, read-only preview, then confirmed implementation |
+| Resolve, specify, implement, and verify focused work | `commands/implement.md` | Non-destructive mutations inside the named target; conditional stops preserve user-authority boundaries |
 | Review a staged snapshot | `commands/stage-review.md` | Read-only |
 | Close completed work | `commands/closeout.md` | Documentation and tracking only |
 | Suggest a staged commit message | `commands/commit-msg.md` | Read-only |
 | Review a branch and draft pull-request text | `commands/pr-review.md` | Read-only |
 
-`/implement` is one user-facing orchestration command, not a collapsed lifecycle stage. It preserves the Focused Decision Scan, combined Preview Modeling and Spec Build, Confirmation, Implementation, and Verification gates, resumes across conversation turns without another slash command, and has two mandatory user stops: target confirmation before spec mutation and implementation confirmation before source mutation. These stops allow the user to switch models while the confirmed conversation state and durable spec carry the handoff. The spec and preview share one implementation model; local code details are read just in time during implementation rather than through repeated blast-radius surveys.
+`/implement` is the user-facing orchestration command for one focused target. Its invocation authorizes the target's non-destructive repository changes, and its command contract owns conditional stop conditions for unresolved user decisions, scope changes, external authority, destructive actions, and verification gaps. This lifecycle owns artifact readiness rather than conversational checkpoints. The implementation spec carries the durable handoff, and local code details are read just in time during implementation.
 
 Platform-only commands, such as a dedicated engine test procedure, may live below `platforms/<platform>/workflows/commands/`. They extend the available operations but never fork this lifecycle or duplicate a core command.
 

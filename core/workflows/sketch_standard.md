@@ -37,7 +37,7 @@ One to three sentences: what slice of the parent plan this sketch explores and w
 
 ### 2. Summary
 
-Optional but encouraged. Capture the current conclusion of the design or codebase discussion in a scannable shape: short paragraphs, context-specific bullets, or a compact table when comparison matters. This is not an approval surface for implementation; the later spec owns final approval. Do not force a fixed heading template, but make it clear why this slice exists, what direction is currently favored, what the later spec must verify, and what the expected outcome is if the sketch holds up.
+Optional but encouraged. Capture the current conclusion of the design or codebase discussion in a scannable shape: short paragraphs, context-specific bullets, or a compact table when comparison matters. This is not an executable handoff; the later spec owns that contract. Do not force a fixed heading template, but make it clear why this slice exists, what direction is currently favored, what the later spec must verify, and what the expected outcome is if the sketch holds up.
 
 ### 3. Requirements (standalone sketch only)
 

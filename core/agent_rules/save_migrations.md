@@ -2,6 +2,18 @@
 
 Save files live on player disks. Code that parses old save formats is not dead code, even when nothing in the current codebase writes that format anymore. That is exactly what a migration is.
 
+## When To Create A Migration
+
+Create a migration only when all of the following hold:
+
+1. A shipped or explicitly supported version can have persisted data in the old shape.
+2. The current change would otherwise make that data fail to load, change meaning, or lose information.
+3. The project's active compatibility contract or explicit user direction requires that data to remain supported.
+
+Do not create migrations, legacy reads, fallback branches, or version bumps for hypothetical data or schemas that have not shipped. For unshipped development data, update the current writer, reader, fixtures, and authored samples together and remove the obsolete shape.
+
+When it is unclear whether persisted data is covered by an active compatibility contract, inspect the project's version and persistence owners. Ask only when preserving or breaking that compatibility is a user-authority decision.
+
 ## Never Delete Without Sign-Off
 
 - Versioned migration blocks such as `if from_version < N:` are append-only. Old blocks stay in place so saves can migrate through every historical step.
@@ -11,9 +23,9 @@ Save files live on player disks. Code that parses old save formats is not dead c
 
 Deleting or simplifying any compatibility path requires explicit user sign-off and is normally only done at a declared save-compatibility break.
 
-## When Refactoring Serialized Data
+## Implementing A Required Migration
 
-If you rename, remove, restructure, or reinterpret any field that appears in `to_dict()` or `from_dict()`:
+When the creation conditions above require a migration for a renamed, removed, restructured, or reinterpreted serialized field:
 
 1. Bump the relevant store/provider version.
 2. Append a new migration step that rewrites the old payload into the new shape. Migrate the data rather than branching normal runtime code around old formats.
