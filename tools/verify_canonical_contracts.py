@@ -67,6 +67,37 @@ REQUIRED: dict[str, tuple[str, ...]] = {
         "Derived state",
         "Multiple entry points that perform the same transition",
     ),
+    "profiles/deterministic-rules/profile_startup.md": (
+        "# Deterministic Rules Profile",
+        "standards/rules_layer_ownership.md",
+        "platforms/web-react/skills/rules_layer_day_zero.md",
+    ),
+    "profiles/deterministic-rules/standards/rules_layer_ownership.md": (
+        "## Roles",
+        "## Decision Fences",
+        "Blocking only known owners is not a fence",
+        "## Access Census",
+        "## Gates Before Corpus",
+    ),
+    "platforms/web-react/skills/rules_layer_day_zero.md": (
+        "deterministic-rules",
+        "dependency-cruiser.cjs",
+        "--record-baseline",
+        "check:boundaries",
+        "check:ownership",
+    ),
+    "tools/consumer_templates/platforms/web-react/dependency-cruiser.cjs": (
+        "const DECISION_FENCES",
+        "pathNot: fence.allowed",
+        "const OWNER_BOUNDARIES",
+        "const STATE_FACADES",
+    ),
+    "tools/consumer_templates/platforms/web-react/check-ownership.mjs": (
+        "--record-baseline",
+        "--update-baseline",
+        "mkdirSync(path.dirname(ALLOWLIST)",
+        "configuration error",
+    ),
     "core/workflows/work_lifecycle.md": (
         "## Canonical Flow",
         "Draft\n-> (Probe)\n-> (Main Plan)\n-> (Child Sketch)\n-> Implementation Spec",

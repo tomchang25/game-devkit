@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.12.0
+
+- Add the opt-in `deterministic-rules` profile for resolver/effect decision slices, single-writer mutation owners, acyclic owner direction, mechanical snapshot assembly, and access gates that exist before the first profiled module.
+- Add a Web day-zero skill and consumer-owned dependency-cruiser and raw-state-census starters. Decision fences use configured import allowlists, the baseline may only shrink, and both gates are deliberately triggered once before use.
+- Register the profile for Godot and Web React consumers and route platform-specific enforcement from the selected profile startup.
+
 ## 0.11.0
 
 - Define one canonical Web development-tool route surface in the project structure standard: the exact `/debug` namespace, hub and read-only catalog dispatch, unknown-path fallback, ordinary-route isolation, and compile-time guarded production exclusion.

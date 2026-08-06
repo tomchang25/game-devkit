@@ -65,6 +65,10 @@
       "startup": "profiles/action-rpg/profile_startup.md",
       "platforms": ["godot"]
     },
+    "deterministic-rules": {
+      "startup": "profiles/deterministic-rules/profile_startup.md",
+      "platforms": ["godot", "web-react"]
+    },
     "sim-management": {
       "startup": "profiles/sim-management/profile_startup.md",
       "platforms": ["godot"]

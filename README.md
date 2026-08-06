@@ -17,6 +17,7 @@ platforms/
   web-react/                  React, DOM, browser persistence, and PWA contracts
 profiles/
   action-rpg/                 Action-entity architecture; currently constrained to Godot
+  deterministic-rules/       Resolver/effect rules architecture with enforced ownership boundaries
   sim-management/             Store/System management architecture; currently constrained to Godot
 tools/
   consumer_templates/         Tool-owned starters for required operation contracts and recommended governance scaffolding
